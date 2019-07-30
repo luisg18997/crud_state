@@ -19,6 +19,7 @@ const AddTodo = (props) => {
     <div className='container-fluid'>
       <div className="row justify-content-center align-items-center  minh-100">
         <div className="col-lg-10">
+          <h4 className='text-center'>ADD</h4>
           <Formik
             values={values}
             handleSubmit={handleSubmit}
