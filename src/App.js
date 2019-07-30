@@ -1,15 +1,11 @@
-import React from 'react';
-import {Router, Switch, Route } from 'react-router-dom';
-import history from './util/history'
-import Panel from './components/Panel'
+import React, {Fragment} from 'react';
+import Dashboard from './components/Dashboard'
 
 function App() {
   return (
-    <Router history={history}>
-      <Switch>
-        <Route exact path='/'  component={Panel}/>
-      </Switch>
-    </Router>
+    <Fragment>
+      <Dashboard />
+    </Fragment>
   );
 }
 
