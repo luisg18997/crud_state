@@ -3,9 +3,11 @@ import AddTodo from './AddTodo'
 
 const data = {
   author: {
+    id: '',
    name: '',
    books : [
      {
+       id: '',
       name: '',
       publication_date: '',
       etidorial: '',
@@ -13,9 +15,12 @@ const data = {
       resumen: '',
       ubication: {
         library: 'true',
-        responsable: '',
-        withdrawal_date: '',
-        return_date: ''
+        library_ubication: '',
+        loan: {
+          responsable: '',
+          withdrawal_date: '',
+          return_date: ''
+        }
       }
     },
    ]
