@@ -27,27 +27,6 @@ export const Input = (props) => {
 }
 
 
-export const InputWname = (props) => {
-  const {
-    name,
-    type,
-    touched,
-    error,
-    handleChange,
-    handleBlur,
-    value,
-    placeholder,
-    disabled
-  } = props
-  return (
-    <Fragment>
-      <input disabled={disabled} className={touched===true && error?'form-control is-invalid' : 'form-control'} type={type} name={name} onChange={handleChange} placeholder={placeholder} value={value} onBlur={handleBlur}/>
-      <ErrorMessage name={name}>{msg => <div className="error error-message" style={{color: '#E92F2F'}}>{msg}</div>}</ErrorMessage>
-    </Fragment>
-  )
-}
-
-
 export const Select = (props) => {
   const {
     name,
@@ -63,7 +42,7 @@ export const Select = (props) => {
     <Fragment>
      {
     placeholder !==undefined &&
-    <label style={{ color: '#292D5A',fontSize:'15px' }} >{placeholder}</label>
+    <label style={{ color: '#292D5A',fontSize:'15px' }} ><strong>{placeholder}</strong></label>
     }
       <select className={touched && error ? 'form-control is-invalid' : 'form-control'} name={name} onChange={handleChange} value={value} onBlur={handleBlur}>
         <option value='0' key='0'>Select {placeholder}...</option>
@@ -76,29 +55,6 @@ export const Select = (props) => {
   )
 }
 
-export const SelectWname = (props) => {
-  const {
-    name,
-    touched,
-    error,
-    handleChange,
-    handleBlur,
-    value,
-    valueSelect,
-    placeholder
-  } = props
-  return (
-    <Fragment>
-      <select className={touched && error ? 'form-control is-invalid' : 'form-control'} name={name} onChange={handleChange} value={value} onBlur={handleBlur}>
-        <option value='0' key='0'>Select {placeholder}...</option>
-        {valueSelect.map(res =>
-          <option value={res.id} key={res.id}>{res.label}</option>
-        )}
-      </select>
-      <ErrorMessage name={name}>{msg => <div className="error error-message" style={{ color: '#E92F2F' }}>{msg}</div>}</ErrorMessage>
-    </Fragment>
-  )
-}
 
 export const CheckBox = (props) => {
   const {

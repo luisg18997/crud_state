@@ -9,6 +9,7 @@ const Form = (props) => {
     validationSchema,
     MyForm,
     valuesSelect,
+    handleData,
     valueButton,
   } = props
   return(
@@ -26,6 +27,8 @@ const Form = (props) => {
        touched={props.touched}
        valueButton={valueButton}
        setFieldValue={props.setFieldValue}
+       handleData={handleData}
+       setFieldTouched={props.setFieldTouched}
         />} />
   )
 }
@@ -34,6 +37,7 @@ Form.propTypes = {
   valuesSelect: PropTypes.object,
   values: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handleData: PropTypes.func,
   MyForm: PropTypes.func.isRequired,
   validationSchema: PropTypes.object.isRequired,
   valueButton: PropTypes.bool.isRequired,

@@ -1,309 +1,286 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import {InputWname, SelectWname, Input, InputDate, TextArea, CheckBox, Radio} from '../../util/forms'
+import { Input, InputDate, TextArea, CheckBox, Radio, Select} from '../../util/forms'
 import {Row, Col, FormGroup} from 'reactstrap'
-
 import { UncontrolledTooltip } from 'reactstrap';
-import { FieldArray } from 'formik'
 
 import masBtn from '../../images/masBtn.png'
 
 const BooksForms = (props) => {
   const {
-    handleBlur,
     values,
-    error,
-    touched,
+    handleSubmit,
+    setFieldValue,
+    handleBlur,
     handleData,
+    setFieldTouched,
+    error,
+    touched
+
   } = props
 
-  const [data, setData] = useState( {
-     id: '',
-    name: '',
-    publication_date: '',
-    etidorial: '',
-    book_genre: ['' ,'', '', '', '', '', '', '','','', '', ''],
-    book_genre_selected: [false,false, false, false, false,false, false, false, false,false, false, false],
-    resumen: '',
-    ubication: {
-      library: 'true',
-      library_ubication: '',
-      loan: {
-        responsable: '',
-        withdrawal_date: '',
-        return_date: ''
-      }
-    }
-  })
-  const [preload, setPreload] = useState(true)
+  console.log(props);
+  const value = [
+    {
+      id: 'section Drama',
+      label: 'section Drama'
+    },
+    {
+      id: 'section Comedy',
+      label: 'section Comedy'
+    },
+    {
+      id: 'section Suspense',
+      label: 'section Suspense'
+    },
+    {
+      id: 'section Self help',
+      label: 'section Self help'
+    },
+    {
+      id: 'section Adventure',
+      label: 'section Adventure'
+    },
+    {
+      id: 'section Fiction',
+      label: 'section Fiction'
+    },
+    {
+      id: 'section Romantic',
+      label: 'section Romantic'
+    },
+    {
+      id: 'section Childish',
+      label: 'section Childish'
+    },
+    {
+      id: 'section Terror',
+      label: 'section Terror'
+    },
+    {
+      id: 'section Historical',
+      label: 'section Historical'
+    },
+    {
+      id: 'section Biography',
+      label: 'section Biography'
+    },
+    {
+      id: 'section Erotic',
+      label: 'section Erotic'
+    },
+  ]
+  const [valueSelect, setValueSelect] = useState([
+  ])
+
+  const {book_genre, ubication: { library}} =values
 
   const handleChange = (e) => {
     const {name, value} = e.target
-    setData({
-      ...data,
-      [name]: value
-    })
+    setFieldValue(name, value)
   }
 
-  const handleChangeCheckBox = (e, id) => {
-    const {name, value, checked} = e.target
-    console.log(name, value, checked, id);
-    const book_genre =  [...data.book_genre]
-    const book_genre_selected = [...data.book_genre_selected]
-    console.log(book_genre);
-    let newValue = []
-    if(checked === true) {
-      book_genre_selected[id] = true
-      book_genre[id] = value
-      newValue = book_genre
-    } else {
-      newValue = book_genre.filter((val,index, arr) => {
-        console.log(val);
-        return val !== value
-      })
-      newValue[id] = ''
-      book_genre_selected[id] = false
-    }
-    console.log(newValue);
-    setData({
-      ...data,
-      [name]: newValue,
-      book_genre_selected: book_genre_selected
-    })
-  }
-  useEffect(() => {
-    async function handleData(){
-      setPreload(false)
-    }
-    handleData()
-  },[values])
-
-  const handleUpdateData = (value, index) => {
-    const updateData = data.books
-    updateData[index].edit = false
-    setData({
-      books:[
-        ...updateData
-      ]
-    })
-  }
-
-  const handleDeleteData = (value, index) => {
-    const updateData = data.books.splice(index, 1)
-    console.log(updateData);
-    setData({
-      books:[
-        ...updateData
-      ]
-    })
-  }
-
-  const handleNewData = (value, index) => {
-    const updateData = data.books
-    updateData[index].edit = false
-    setData({
-      books:[
-        ...updateData
-      ]
-    })
-  }
-  const handleUpdate = (index) => {
-    const updateData = data.books
-    updateData[index].edit = true
-    console.log(updateData);
-    setData({
-      books:[
-        ...updateData,
-      ]
-    })
-  //  handleData(updateData[index].edit, true);
-  }
-  if(preload){
-    return(
-      <div>Loading...</div>
-    )
-  }else{
-    console.log(data);
-    const editForm = (res, index, arrayHelpers) => {
-      return(
-        <Fragment>
-        <div className='col-6 col-md-2'>
-          <InputWname name={`books[${index}].bank_name`} error={error.bank_name} touched={touched.bank_name} handleBlur={handleBlur} value={res.bank_name} handleChange={handleChange} placeholder='Book name' />
-        </div>
-        <div className='col-6 col-md-3'>
-          <InputWname name={`books[${index}].routing_bank_numbers`} error={error.routing_bank_numbers} touched={touched.routing_bank_numbers} handleBlur={handleBlur} value={res.routing_bank_numbers} placeholder='Routing bank number' handleChange={handleChange} />
-        </div>
-        <div className='col-5 col-md-3'>
-          <InputWname name={`books[${index}].bank_account_number`} error={error.bank_name} touched={touched.bank_account_number} value={res.bank_account_number} handleChange={handleChange} placeholder='Book account number' />
-        </div>
-        <div className='col-4 col-md-2'>
-        <SelectWname touched={touched.bank_account_type_id} value={res.bank_account_type_id}  error={error.bank_account_type_id} name={`books[${index}].bank_account_type_id`} handleChange={handleChange} handleBlur={handleBlur} valueSelect={[{id:'1',label:'Savings'},{id:'2',label:'Checking'}]} placeholder='Book Account Type' />
-        </div>
-        <div className='col-3 col-md-2 mt-auto'>
-              <button type="button" className="btn " href="#" id='editBook'>
-              <i onClick={() => {res.id !== ''?handleUpdateData(res,index):handleNewData(res,index)}} className="fa fa-floppy-o" aria-hidden="true"></i>
-              </button>
-              <UncontrolledTooltip placement="top" target='editBook' >{res.id !== ''?'Edit save Book Account':'Save Book Account'}</UncontrolledTooltip>
-            <button type="button" className="btn "  href="#" id="DeleteBook">
-              <i onClick={() => {res.id !== ''?handleDeleteData(res, index): arrayHelpers.remove(index)}} className="fa fa-trash-o" aria-hidden="true" />
-            </button>
-            <UncontrolledTooltip placement="top"  target='DeleteBook' >Delete Book Account</UncontrolledTooltip>
-        </div>
-        </Fragment>
-      )
-
-    }
-
-    const viewData = (res, index) => {
-      return(
-        <Fragment>
-        <div className='col-6 col-md-2'>
-        {res.bank_name}
-        </div>
-        <div className='col-6 col-md-3'>
-        {res.routing_bank_numbers}
-        </div>
-        <div className='col-5 col-md-3'>
-        {res.bank_account_number}
-        </div>
-        <div className='col-4 col-md-2'>
-        {res.bank_account_type}
-        </div>
-        <div className='col-3 col-md-2 mt-auto'>
-
-            <button type="button" className="btn " href="#" id='editBook'>
-              <i  onClick={() => handleUpdate(index)} className="fa fa-pencil" aria-hidden="true"></i>
-            </button>
-            <UncontrolledTooltip placement="top" target='editBook' >Edit Book Account</UncontrolledTooltip>
-
-            <button type="button" className="btn"  href="#" id="DeleteBook">
-              <i onClick={() => { handleDeleteData(res, index) }} className="fa fa-trash-o" aria-hidden="true" />
-            </button>
-            <UncontrolledTooltip placement="top"  target='DeleteBook' >Delete Book Account</UncontrolledTooltip>
-        </div>
-        </Fragment>
-      )
-    }
-
-    const Content = (res, index, arrayHelpers) => {
-      if(res.edit === true) {
-        return editForm(res,index, arrayHelpers);
-      } else {
-         return viewData(res, index)
+  useEffect(() => { // add newValueSelect to Select
+    let newValueSelect = []
+    for (let i = 0; i < book_genre.length; i++) {
+      for (let j = 0; j < value.length; j++) {
+        if(value[j].id.toLowerCase().search(book_genre[i])!== -1) {
+          newValueSelect.push(value[j])
+        }
       }
     }
+    setValueSelect(newValueSelect)
+  }, [book_genre])
 
-    const handleAddnew = () => {
-      const newData = data.books;
-      newData.push({
-        id: '',
-        bank_account_number: '',
-        bank_account_type: {name: ''},
-        bank_name: '',
-        routing_bank_numbers: '',
-        bank_account_type_id: '',
-        edit: true,
-      })
-      setData(
-        {
-          books: [
-            ...newData,
-          ]
-        }
-      )
+  const handleChangeCheckBox = (e, id) => { //changes the checkbox
+    const {name, value, checked} = e.target
+    console.log(name, value, checked, id);
+    const book_genre =  [...values.book_genre]
+    const book_genre_selected = [...values.book_genre_selected]
+    if(checked === true) {
+      book_genre_selected[id] = true
+      book_genre.push(value)
+    } else {
+      let index = book_genre.indexOf(value)
+      if (index > -1) {
+        book_genre.splice(index, 1);
+        book_genre_selected[id] = false
+      }
+  }
+  setFieldValue(name, book_genre)
+  setFieldValue('book_genre_selected', book_genre_selected)
+}
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      handleData(library)
+      if(library === 'true') {
+        setFieldValue('ubication.loan', {
+          responsable: '',
+          card_id: '',
+          withdrawal_date: '',
+          return_date: ''
+        })
+        setFieldTouched('ubication.loan.responsable', false)
+        setFieldTouched('ubication.loan.card_id', false)
+        setFieldTouched('ubication.loan.withdrawal_date', false)
+        setFieldTouched('ubication.loan.return_date', false)
+      } else {
+        setFieldValue('ubication.library_ubication', '')
+        setFieldTouched('ubication.library_ubication', false)
+      }
     }
+    handleUpdate()
+  }, [library])
+
 
     return (
-      <Fragment>
-        <FieldArray
-          name="Library.author.books"
-          render={arrayHelpers => (
             <Fragment>
-            <Row form>
+            <Row form className='w-100'>
+              <Col  xs={12} md={12}>
+              <Row form className='w-100'>
+                <Col  xs={10} md={11}>
+                  <h5 className='text-center'>ADD Books</h5>
+                </Col>
+                  <Col  xs={2} md={1}>
+                    <button style={{ backgroundColor: 'transparent', border: 'none' }}
+                      type="button"
+                      id='addBook'
+                      href='#'
+                      onClick={handleSubmit}>
+                      <img src={masBtn} style={{ height: "20px", cursor: "pointer" }} alt=''></img>
+                    </button>
+                    <UncontrolledTooltip placement="right" target="addBook">
+                    ADD Book
+                  </UncontrolledTooltip>
+                  </Col>
+                </Row>
+              </Col>
               <Col  xs={6} md={6}>
                 <FormGroup>
-                  <Input name='name' value={data.name} handleChange={handleChange} error={error} touched={touched} handleBlur={handleBlur} placeholder="Name of book" />
+                  <Input name='name' value={values.name} handleChange={handleChange} error={error} touched={touched} handleBlur={handleBlur} placeholder="Name of book" />
                 </FormGroup>
               </Col>
               <Col  xs={6} md={6}>
                 <FormGroup>
-                  <InputDate name='publication_date' value={data.publication_date} handleChange={handleChange} error='' touched={touched} handleBlur={handleBlur} placeholder="Publication date" />
+                  <InputDate name='publication_date' value={values.publication_date} handleChange={handleChange} error='' touched={touched} handleBlur={handleBlur} placeholder="Publication date" />
                 </FormGroup>
               </Col>
               <Col  xs={6} md={6}>
                 <FormGroup>
-                  <Input name='editorial' value={data.editorial} handleChange={handleChange} error={error} touched={touched} handleBlur={handleBlur} placeholder="Name of Editorial" />
+                  <Input name='editorial' value={values.editorial} handleChange={handleChange} error={error} touched={touched} handleBlur={handleBlur} placeholder="Name of Editorial" />
                 </FormGroup>
               </Col>
-              <Col  xs={6} md={6}>
+              <Col  xs={12} md={6}>
                 <FormGroup>
                 <label style={{ color: '#292D5A',fontSize:'15px' }} ><strong>Book Genre</strong></label>
-                <Row form>
+                <Row form className='w-100'>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Drama' name={`book_genre`} value='drama' checked={data.book_genre_selected[0]} handleChange={(e) =>{handleChangeCheckBox(e, 0)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Drama' name={`book_genre`} value='drama' checked={values.book_genre_selected[0]} handleChange={(e) =>{handleChangeCheckBox(e, 0)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Comedy' name={`book_genre`} value='comedy' checked={data.book_genre_selected[1]}  handleChange={(e) =>{handleChangeCheckBox(e, 1)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Comedy' name={`book_genre`} value='comedy' checked={values.book_genre_selected[1]}  handleChange={(e) =>{handleChangeCheckBox(e, 1)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Suspense' name={`book_genre`} value='suspense' checked={data.book_genre_selected[2]}  handleChange={(e) =>{handleChangeCheckBox(e, 2)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Suspense' name={`book_genre`} value='suspense' checked={values.book_genre_selected[2]}  handleChange={(e) =>{handleChangeCheckBox(e, 2)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Self help' name={`book_genre`} value='self help' checked={data.book_genre_selected[3]}  handleChange={(e) =>{handleChangeCheckBox(e, 3)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Self help' name={`book_genre`} value='self help' checked={values.book_genre_selected[3]}  handleChange={(e) =>{handleChangeCheckBox(e, 3)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Adventure' name={`book_genre`} value='adventure' checked={data.book_genre_selected[4]}  handleChange={(e) =>{handleChangeCheckBox(e, 4)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Adventure' name={`book_genre`} value='adventure' checked={values.book_genre_selected[4]}  handleChange={(e) =>{handleChangeCheckBox(e, 4)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Fiction' name={`book_genre`} value='fiction' checked={data.book_genre_selected[5]}  handleChange={(e) =>{handleChangeCheckBox(e, 5)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Fiction' name={`book_genre`} value='fiction' checked={values.book_genre_selected[5]}  handleChange={(e) =>{handleChangeCheckBox(e, 5)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Romantic' name={`book_genre`} value='romantic' checked={data.book_genre_selected[6]}  handleChange={(e) =>{handleChangeCheckBox(e, 6)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Romantic' name={`book_genre`} value='romantic' checked={values.book_genre_selected[6]}  handleChange={(e) =>{handleChangeCheckBox(e, 6)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Childish' name={`book_genre`} value='childish' checked={data.book_genre_selected[7]}  handleChange={(e) =>{handleChangeCheckBox(e, 7)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Childish' name={`book_genre`} value='childish' checked={values.book_genre_selected[7]}  handleChange={(e) =>{handleChangeCheckBox(e, 7)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Terror' name={`book_genre`} value='terror' checked={data.book_genre_selected[8]}  handleChange={(e) =>{handleChangeCheckBox(e, 8)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Terror' name={`book_genre`} value='terror' checked={values.book_genre_selected[8]}  handleChange={(e) =>{handleChangeCheckBox(e, 8)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Historical' name={`book_genre`} value='historical' checked={data.book_genre_selected[9]}  handleChange={(e) =>{handleChangeCheckBox(e, 9)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Historical' name={`book_genre`} value='historical' checked={values.book_genre_selected[9]}  handleChange={(e) =>{handleChangeCheckBox(e, 9)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Biography' name={`book_genre`} value='biography' checked={data.book_genre_selected[10]}  handleChange={(e) =>{handleChangeCheckBox(e, 10)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Biography' name={`book_genre`} value='biography' checked={values.book_genre_selected[10]}  handleChange={(e) =>{handleChangeCheckBox(e, 10)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                   <Col xs={3} md={3} style={{paddingLeft: 25}}>
-                    <CheckBox labelName='Erotic' name={`book_genre`} value='erotic' checked={data.book_genre_selected[11]}  handleChange={(e) =>{handleChangeCheckBox(e,11)}} error='' touched={touched} handleBlur={handleBlur} />
+                    <CheckBox labelName='Erotic' name={`book_genre`} value='erotic' checked={values.book_genre_selected[11]}  handleChange={(e) =>{handleChangeCheckBox(e,11)}} error='' touched={touched} handleBlur={handleBlur} />
                   </Col>
                 </Row>
                 </FormGroup>
               </Col>
               <Col  xs={12} md={12}>
                 <FormGroup>
-                  <TextArea name='resumen' value={data.resumen} handleChange={handleChange} error='' touched={touched} handleBlur={handleBlur} placeholder="Resumen of Book" />
+                  <TextArea name='resumen' value={values.resumen} handleChange={handleChange} error='' touched={touched} handleBlur={handleBlur} placeholder="Resumen of Book" />
                 </FormGroup>
+              </Col>
+              <Col  xs={10} md={11}>
+                <h5 className='text-center'>Ubication of Book</h5>
               </Col>
               <Col  xs={12} md={12}>
                 <FormGroup>
-                  <TextArea name='resumen' value={data.resumen} handleChange={handleChange} error='' touched={touched} handleBlur={handleBlur} placeholder="Resumen of Book" />
+                  <Row form className='w-100'>
+                    <Col  xs={10} md={9}>
+                      <label style={{ color: '#292D5A',fontSize:'15px' }} ><strong>The Book is in the Library?</strong></label>
+                    </Col>
+                    <Col  xs={2} md={3}>
+                      <FormGroup>
+                        <Row form className='w-100'>
+                          <Col xs={7} md={3} className='pr-1 text-center pt-2'>
+                            <Radio name='ubication.library' labelName='Yes' value={true}  handleChange={handleChange} handleBlur={handleBlur} checked={values.ubication.library==='true'} />
+                          </Col>
+                          <Col xs={7} md={3} className='pr-1 text-center pt-2'>
+                            <Radio name='ubication.library' labelName='No' value={false}  handleChange={handleChange} handleBlur={handleBlur} checked={values.ubication.library==='false'} />
+                          </Col>
+                        </Row>
+                      </FormGroup>
+                    </Col>
+                  </Row>
                 </FormGroup>
               </Col>
+              {
+                library === 'true'?
+                <Fragment>
+                  <Col  xs={12} md={12}>
+                    <FormGroup>
+                      <Select   name='ubication.library_ubication' touched={touched}   error=''  handleChange={handleChange} handleBlur={handleBlur} value={values.ubication.library_ubication} valueSelect={valueSelect}  placeholder='Ubication library' />
+                    </FormGroup>
+                  </Col>
+                </Fragment>
+                :
+                <Fragment>
+                  <Col  xs={10} md={11}>
+                    <h5 className='text-center'>Loan</h5>
+                  </Col>
+                  <Col  xs={6} md={6}>
+                    <FormGroup>
+                      <Input name='ubication.loan.responsable' value={values.ubication.loan.responsable} handleChange={handleChange} error={error} touched={touched} handleBlur={handleBlur} placeholder="Name of Responsable" />
+                    </FormGroup>
+                  </Col>
+                  <Col  xs={6} md={6}>
+                    <FormGroup>
+                      <Input name='ubication.loan.card_id' value={values.ubication.loan.card_id} handleChange={handleChange} error={error} touched={touched} handleBlur={handleBlur} placeholder="Card ID of responsable " />
+                    </FormGroup>
+                  </Col>
+                  <Col  xs={6} md={6}>
+                    <FormGroup>
+                      <InputDate name='ubication.loan.withdrawal_date' value={values.ubication.loan.withdrawal_date} handleChange={handleChange} error='' touched={touched} handleBlur={handleBlur} placeholder="Withdrawal date" />
+                    </FormGroup>
+                  </Col>
+                  <Col  xs={6} md={6}>
+                    <FormGroup>
+                      <InputDate name='ubication.loan.return_date' value={values.ubication.loan.return_date} handleChange={handleChange} error='' touched={touched} handleBlur={handleBlur} placeholder="Return date" />
+                    </FormGroup>
+                  </Col>
+                </Fragment>
+              }
             </Row>
-              {values.books.map((res, index) => (
-                <div className='form-row' key={index} style={{ paddingBottom: '1%' }}>
-                  {Content(res, index, arrayHelpers)}
-                </div>
-              ))}
-              <button style={{ backgroundColor: 'transparent', border: 'none' }}
-                type="button"
-                onClick={() => handleAddnew()}>
-                <img src={masBtn} style={{ height: "20px", cursor: "pointer" }} alt=''></img>
-              </button>
-            </Fragment>
-          )}
-        />
       </Fragment>
     )
-  }
 }
 
 export default BooksForms
