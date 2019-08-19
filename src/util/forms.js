@@ -141,7 +141,7 @@ export const InputDate = (props) => {
       {
       placeholder !==undefined && <label style={{ color: '#292D5A' }} ><strong>{placeholder}</strong></label>
       }
-      <input className={touched && error ? 'form-control is-invalid' : 'form-control'} type='date' name={name} onChange={handleChange} placeholder={placeholder} value={value} onBlur={handleBlur} disabled={disabled} />
+      <input onKeyDown={(e)=>{e.preventDefault()}} className={touched && error ? 'form-control is-invalid' : 'form-control'} type='date' name={name} onChange={handleChange} placeholder={placeholder} value={value} onBlur={handleBlur} disabled={disabled} />
       <ErrorMessage name={name}>{msg => <div className="error error-message" style={{ color: '#E92F2F' }}>{msg}</div>}</ErrorMessage>
     </Fragment>
   )

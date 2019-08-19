@@ -137,23 +137,10 @@ const BooksForms = (props) => {
             <Fragment>
             <Row form className='w-100'>
               <Col  xs={12} md={12}>
-              <Row form className='w-100'>
-                <Col  xs={10} md={11}>
                   <h5 className='text-center'>ADD Books</h5>
                 </Col>
-                  <Col  xs={2} md={1}>
-                    <button style={{ backgroundColor: 'transparent', border: 'none' }}
-                      type="button"
-                      id='addBook'
-                      href='#'
-                      onClick={handleSubmit}>
-                      <img src={masBtn} style={{ height: "20px", cursor: "pointer" }} alt=''></img>
-                    </button>
-                    <UncontrolledTooltip placement="right" target="addBook">
-                    ADD Book
-                  </UncontrolledTooltip>
-                  </Col>
-                </Row>
+              <Col  xs={10} md={11}>
+              <p style={{color: 'red'}}>Can add more of a book</p>
               </Col>
               <Col  xs={6} md={6}>
                 <FormGroup>
@@ -278,6 +265,18 @@ const BooksForms = (props) => {
                   </Col>
                 </Fragment>
               }
+              <Col  xs={'auto'} md={'auto'}>
+                <button style={{ backgroundColor: 'transparent', border: 'none' }}
+                  type="button"
+                  id='addBook'
+                  href='#'
+                  onClick={handleSubmit}>
+                  <img src={masBtn} style={{ height: "20px", cursor: "pointer" }} alt=''></img>
+                </button>
+                <UncontrolledTooltip placement="right" target="addBook">
+                ADD Book
+              </UncontrolledTooltip>
+              </Col>
             </Row>
       </Fragment>
     )

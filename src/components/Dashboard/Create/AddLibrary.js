@@ -7,18 +7,25 @@ import {Row, Col} from 'reactstrap'
 
 const AddTodo = (props) => {
   const {
-    values,
+    setStatus,
     data,
     handleChange
   } = props
 
-  const handleSubmit = (NewVal) => {
+  const handleSubmit = (NewVal, action) => {
     console.log(NewVal);
     if(NewVal.author.books.length !== 0) {
       handleChange(NewVal)
+      action.resetForm()
+      setStatus(false)
     } else {
       ModalError('Please ADD ONE BOOK of the Author')
     }
+  }
+
+  const handleData= (setView, setRows) => {
+    setView([])
+    setRows([])
   }
 
 
@@ -31,6 +38,7 @@ const AddTodo = (props) => {
             handleSubmit={handleSubmit}
             validationSchema={LibraryValidation}
             MyForm={LibraryForm}
+            handleData={handleData}
           />
         </Col>
       </Row>

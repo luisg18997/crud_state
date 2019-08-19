@@ -69,7 +69,7 @@ const Panel = () => {
                 </Col>
               </Row>
           < Collapse isOpen={Status}>
-              <AddTodo  values={libraryData} data={data} handleChange={handleChange}/>
+              <AddTodo setStatus={setStatus}  values={libraryData} data={data} handleChange={handleChange}/>
               </  Collapse>
             </Col>
             <Col xs={12}  md={12} className='mt-3'>
