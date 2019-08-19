@@ -8,7 +8,7 @@ const ListAutor = (props) => {
 
   const handleContent = () => {
     if(values.Library.length === 0) {
-      Content = (<Fragment><h5 className='text-center'>Autor not registred! please add</h5></Fragment>);
+      Content = (<Fragment><h5 className='text-center'>Autor not registered! please add one</h5></Fragment>);
     } else {
       Content = (<Fragment>
         {values.Library.map((res, key) => {

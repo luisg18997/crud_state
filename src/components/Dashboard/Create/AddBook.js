@@ -42,9 +42,6 @@ const handleChangeError = (value) => {
     setError(BookValidation(true))
   }
 }
-useEffect(() => {
-    handleChangeError()
-}, [])
 
 
   const handleNewData = (values, id, setFieldValue) => {
@@ -302,6 +299,9 @@ useEffect(() => {
     handleNewData(values, id, action.setFieldValue)
     action.resetForm(data)
   }
+
+
+    console.log(error);
 
   return(
     <Fragment>
