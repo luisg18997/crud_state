@@ -18,13 +18,12 @@ const LibraryForm = (props) => {
 
   const handleChange = (e) => {
     const {name, value} = e.target
-    console.log(name, value);
     setFieldValue(name, value)
   }
-  console.log(props);
+
   return(
     <Fragment>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Row form>
           <Col xs={12} md={12} >
             <FormGroup>
@@ -35,7 +34,7 @@ const LibraryForm = (props) => {
             <AddBook VAl={values.author} view={view} setView={setView} rows={rows} setRows={setRows} handleData={handleChange} error={error} touched={touched} handleBlur={handleBlur} />
           </Col>
           <Col xs={12} className='text-center'>
-            <button type="submit" onClick={()=> {rows.length > 0? handleData(setView, setRows): console.log('falta rows');}} className="btn btn-success mt-2 pl-5 pr-5"><strong className='letter'><span>SEND</span></strong></button>
+            <button type="submit" onClick={handleSubmit} className="btn btn-success mt-2 pl-5 pr-5"><strong className='letter'><span>SEND</span></strong></button>
           </Col>
         </Row>
       </Form>

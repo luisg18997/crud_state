@@ -7,16 +7,11 @@ const ListBooks = (props) => {
   const [view, setView] = useState([])
   const [rows, setRows] = useState([])
 
-useEffect(() => {
-  const NewView = [...view]
-  NewView[authorID] = []
-  setView(NewView)
-}, [authorID])
+
 
 useEffect(() => {
   const HandleData = () => {
-    const NewValues = [...rows]
-    NewValues[authorID] = data.map((res) => ({
+    const NewValues = data.map((res) => ({
       id: res.id,
       name: res.name,
       publication_date: res.publication_date,
@@ -35,7 +30,7 @@ useEffect(() => {
         </Fragment>),
       subRow:
         {
-          library:res.library,
+          library:res.ubication.library,
           library_ubication: res.ubication.library_ubication || '',
           responsable: res.ubication.loan.responsable || '',
           card_id: res.ubication.loan.card_id || '',
@@ -58,7 +53,7 @@ useEffect(() => {
 
   return(
     <Fragment>
-    <Table rows={rows[authorID]} view = {view[authorID]} setView={setView}/>
+    <Table rows={rows} view = {view} setView={setView}/>
     </Fragment>
   )
 }

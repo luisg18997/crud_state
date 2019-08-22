@@ -210,7 +210,6 @@ const handleChangeError = (value) => {
       const index = values[i].indexOf(true)
       Update[index] = values[i][index]
     }
-    console.log(Update);
     return Update
   }
 
@@ -221,7 +220,6 @@ const handleChangeError = (value) => {
   const handleDelete = (id) => {
     const index = rows.indexOf(id)
     const updateData = rows.splice(index, 1)
-    console.log(updateData);
     if( updateData.indexOf(id) !== -1) {
       ModalError('can`t  delete book')
     } else {
@@ -246,7 +244,6 @@ const handleChangeError = (value) => {
         name: 'author.books'
       }
     }
-    console.log(newData);
     handleData(NewValues)
     UpdateRows(values)
     action.resetForm(data)
@@ -261,15 +258,8 @@ const handleChangeError = (value) => {
   }
 
   const handleAddnew = (values, action) => {
-    console.log(values, action);
     const newData = [...VAl.books];
-    let id
-    console.log(newData.length);
-    if(newData.length === 0) {
-      id= 1
-    } else {
-      id=  newData.length + 1
-    }
+    let id = newData.length + 1
     newData.push({
       id: id,
      name: values.name,
@@ -299,9 +289,6 @@ const handleChangeError = (value) => {
     handleNewData(values, id, action.setFieldValue)
     action.resetForm(data)
   }
-
-
-    console.log(error);
 
   return(
     <Fragment>

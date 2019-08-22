@@ -7,16 +7,17 @@ import {Row, Col} from 'reactstrap'
 
 const AddTodo = (props) => {
   const {
+    values,
     setStatus,
     data,
     handleChange
   } = props
 
   const handleSubmit = (NewVal, action) => {
-    console.log(NewVal);
+    console.log(action);
     if(NewVal.author.books.length !== 0) {
+      console.log(values);
       handleChange(NewVal)
-      action.resetForm()
       setStatus(false)
     } else {
       ModalError('Please ADD ONE BOOK of the Author')

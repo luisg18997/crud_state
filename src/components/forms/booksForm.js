@@ -18,7 +18,6 @@ const BooksForms = (props) => {
 
   } = props
 
-  console.log(props);
   const value = [
     {
       id: 'section Drama',

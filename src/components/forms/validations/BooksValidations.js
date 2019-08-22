@@ -22,7 +22,6 @@ const validations = (value) => {
       .required('is required')
     })
   }
-  console.log(Yup.ref('book_genre').isContext);
   const validationFrom = Yup.object().shape({
     name: Yup.string()
     .matches(/^[a-zA-Z0-9.,`-\s]*$/, "only characters and number allowed")
