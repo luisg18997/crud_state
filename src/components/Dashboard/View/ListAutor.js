@@ -7,14 +7,14 @@ const ListAutor = (props) => {
   let Content
 
   const handleContent = () => {
-    if(values.Library.length === 0) {
+    if(values.Library.authors.length === 0) {
       Content = (<Fragment><h5 className='text-center'>Autor not registered! please add one</h5></Fragment>);
     } else {
       Content = (<Fragment>
-        {values.Library.map((res, key) => {
+        {values.Library.authors.map((res, key) => {
           return(
             <Fragment key={key}>
-            <Col xs={6} md={6}  className='text-center'>{res.author.name}</Col>
+            <Col xs={6} md={6}  className='text-center'>{res.name}</Col>
             <Col xs={6} md={6} className='ml-auto'>
               <UncontrolledTooltip placement="top" target="editAuthor">
               Edit Author
@@ -26,7 +26,7 @@ const ListAutor = (props) => {
               <i className="fa fa-trash-o mx-auto" id='deleteAuthor' style={{fontSize: 20}}></i>
               </Col>
               <Col xs={12} md={12}>
-              <ListBooks data={res.author.books} authorID={key}/>
+              <ListBooks data={res.books} authorID={key}/>
               </Col>
             </Fragment>
           )

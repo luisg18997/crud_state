@@ -18,7 +18,6 @@ const validations = (value) => {
       .max(new Date(), 'later dates to the current are not allowed')
       .required('is required'),
       return_date: Yup.date()
-      .min()
       .required('is required')
     })
   }

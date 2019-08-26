@@ -23,7 +23,7 @@ useEffect(() => {
         Edit Book
       </UncontrolledTooltip>
           <i className='fa fa-pencil mx-auto pr-2' id='editBookView' style={{fontSize: 20}}></i>
-          <UncontrolledTooltip placement="top" target="deleteBookdeleteBookView">
+          <UncontrolledTooltip placement="top" target="deleteBookView">
         Delete Book
       </UncontrolledTooltip>
         <i className="fa fa-trash-o mx-auto" id='deleteBookView' style={{fontSize: 20}}></i>
