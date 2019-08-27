@@ -4,8 +4,7 @@ import ListAuthor from './View/ListAutor'
 import {Row, Col, UncontrolledTooltip, Collapse} from 'reactstrap'
 import Mas from '../../images/mas.png'
 import Menos from '../../images/menos.png'
-import {handleRedirect} from '../../util/redirectPage'
-import { ModalError, ModalSucces} from '../../util/modal'
+import { ModalError, ModalSucces, ModalConfirm} from '../../util/modal'
 
 const data = {
   author: {
@@ -22,7 +21,7 @@ const Panel = () => {
   const [StatusList, setStatusList] = useState(false)
 
 
-  const handleChange = async(value) => {
+  const HandleAddData = async(value) => {
     console.log(value);
     let result = false
     console.log(libraryData.Library);
@@ -42,13 +41,78 @@ const Panel = () => {
           authors: [...NewValues]
         }
       })
-      ModalSucces('Success Author Created')
+      ModalSucces('Author created successfully')
     } else {
-      ModalError('Author exits')
+      ModalError('The author already exists')
     }
   }
 
-      console.log(libraryData);
+  const HandleDeleteConfirmAuthor = (id) => {
+    ModalConfirm('Are you sure you want to delete the book?',handleDeleteAuthor, id)
+  }
+
+  const HandleDeleteConfirmBook = (idAuthor, idBook) => {
+      ModalConfirm('Are you sure you want to delete the book?',handleDeleteBook, {idAuthor, idBook})
+  }
+
+  const handleDeleteBook = (id) => {
+    let indexAuthor
+    for (let i = 0; i < libraryData.Library.authors.length; i++) {
+      if(libraryData.Library.authors[i].id === id.idAuthor) {
+        indexAuthor= i
+        break
+      }
+    }
+    let indexBook
+    for (let i = 0; i < libraryData.Library.authors[indexAuthor].books.length; i++) {
+      if(libraryData.Library.authors[indexAuthor].books.id === id.idBook) {
+        indexBook= i
+        break
+      }
+    }
+    console.log(libraryData.Library.authors[indexAuthor].books.splice(indexBook, 1));
+    const UpdateBooks = libraryData.Library.authors[indexAuthor].books.splice(indexBook, 1)
+    console.log(UpdateBooks);
+    if( UpdateBooks.indexOf(id) !== -1) {
+      ModalError('The book could not be deleted')
+    } else {
+      const UpdateData = [...libraryData.Library.authors]
+      UpdateData[indexAuthor].books = [...UpdateBooks]
+      console.log(UpdateData);
+    setData({
+      ...libraryData,
+      Library: {
+        authors:  UpdateData
+      }
+    })
+      ModalSucces('The Book was successfully removed')
+    }
+  }
+
+  const handleDeleteAuthor = (id) => {
+    let indexAuthor
+    for (let i = 0; i < libraryData.Library.authors.length; i++) {
+      if(libraryData.Library.authors[i].id === id) {
+        indexAuthor= i
+        break
+      }
+    }
+    console.log(indexAuthor);
+    const updateData = libraryData.Library.authors.splice(indexAuthor, 1)
+    if( updateData.indexOf(id) !== -1) {
+      ModalError('The author could not be deleted')
+    } else {
+      setData({
+        ...libraryData,
+        Library: {
+          authors: libraryData.Library.authors.splice(indexAuthor, 1)
+        }
+      })
+      ModalSucces('The author was successfully removed')
+    }
+  }
+
+console.log(libraryData);
 
   return(
     <div className='container-fluid w-100 pr-0' style={{paddingTop: '3%'}}>
@@ -74,7 +138,7 @@ const Panel = () => {
                 </Col>
               </Row>
           < Collapse isOpen={Status}>
-              <AddTodo setStatus={setStatus} values={libraryData.Library.authors} data={data} handleChange={handleChange}/>
+              <AddTodo setStatus={setStatus} values={libraryData.Library.authors} data={data} handleChange={HandleAddData}/>
               </  Collapse>
             </Col>
             <Col xs={12}  md={12} className='mt-3'>
@@ -96,7 +160,7 @@ const Panel = () => {
                 </Col>
               </Row>
           < Collapse isOpen={StatusList}>
-              <ListAuthor  values={libraryData} data={data} handleChange={handleChange}/>
+              <ListAuthor  values={libraryData} handleDeleteAuthor={HandleDeleteConfirmAuthor} handleDeleteBook={HandleDeleteConfirmBook}/>
               </  Collapse>
             </Col>
           </Row>

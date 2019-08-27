@@ -3,7 +3,7 @@ import Table from '../../../util/table'
 import {UncontrolledTooltip} from 'reactstrap'
 
 const ListBooks = (props) => {
-  const {data, authorID} = props
+  const {data, authorID, handleDeleteBook} = props
   const [view, setView] = useState([])
   const [rows, setRows] = useState([])
 
@@ -26,7 +26,7 @@ useEffect(() => {
           <UncontrolledTooltip placement="top" target="deleteBookView">
         Delete Book
       </UncontrolledTooltip>
-        <i className="fa fa-trash-o mx-auto" id='deleteBookView' style={{fontSize: 20}}></i>
+        <i className="fa fa-trash-o mx-auto" id='deleteBookView' onClick={()=>{handleDeleteBook(authorID, res.id)}} style={{fontSize: 20}}></i>
         </Fragment>),
       subRow:
         {
@@ -49,7 +49,7 @@ useEffect(() => {
     setRows(NewValues)
   }
   HandleData()
-},[])
+},[data])
 
   return(
     <Fragment>

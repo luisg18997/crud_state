@@ -13,7 +13,7 @@ const AddTodo = (props) => {
     handleChange
   } = props
 
-  const handleSubmit = async(NewVal, action) => {
+  const handleSubmit = async(NewVal, action) => { // Save author
     if(NewVal.author.books.length !== 0) {
       console.log(values);
       NewVal.author.id = values.length +1
@@ -21,7 +21,7 @@ const AddTodo = (props) => {
       await  action.resetForm(data)
       await setStatus(false)
     } else {
-      ModalError('Please ADD ONE BOOK of the Author')
+      ModalError('Please ADD an BOOK of the Author')
     }
   }
 

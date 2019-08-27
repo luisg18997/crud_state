@@ -109,7 +109,7 @@ const BooksForms = (props) => {
   setFieldValue('book_genre_selected', book_genre_selected)
 }
 
-  useEffect(() => {
+  useEffect(() => { // update selection of the ubication of the book 
     const handleUpdate = () => {
       handleData(library)
       if(library === 'true') {

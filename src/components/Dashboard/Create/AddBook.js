@@ -44,7 +44,7 @@ const handleChangeError = (value) => {
 }
 
 
-  const handleNewData = (values, id, setFieldValue) => {
+  const handleNewData = (values, id, setFieldValue) => { // add roe in the table
     const NewValues = [...rows]
     let library
       if(values.ubication.library === 'true') {
@@ -90,7 +90,7 @@ const handleChangeError = (value) => {
     setRows(NewValues)
   }
 
-  const UpdateRows = (value) => {
+  const UpdateRows = (value) => { // update row exist
     let library
       if(value.ubication.library === 'true') {
         library = 'Yes'
@@ -128,7 +128,7 @@ const handleChangeError = (value) => {
   }
 
 
-  const handleUpdateData = (value, setFieldValue) => {
+  const handleUpdateData = (value, setFieldValue) => { // update data of book in the state
     const book_genre_selected = updateBookGenreSelected(value.book_genre)
     setFieldValue('id', value.id)
     setFieldValue('name', value.name)
@@ -146,7 +146,7 @@ const handleChangeError = (value) => {
     }})
   }
 
-  const updateBookGenreSelected = (value) => {
+  const updateBookGenreSelected = (value) => { // get data of book genre selected
     let Update = [...data.book_genre_selected]
     const values = value.map((res) => {
       let NewValue = [];
@@ -213,21 +213,40 @@ const handleChangeError = (value) => {
     return Update
   }
 
-  const handleDeleteData = (id) => {
-    ModalConfirm('Sure delete Book?',handleDelete, id)
+  const handleDeleteData = (id) => { //confirm delete data
+    ModalConfirm('Are you sure you want to delete the book?',handleDeleteRow, id)
   }
 
-  const handleDelete = (id) => {
+  const handleDeleteRow = (id) => { // delete data in the row
     const index = rows.indexOf(id)
     const updateData = rows.splice(index, 1)
     if( updateData.indexOf(id) !== -1) {
-      ModalError('can`t  delete book')
+      ModalError('The book could not be deleted')
     } else {
-      ModalSucces('Delete book success', setRows, updateData)
+      setRows(updateData)
+      handleDelete(id)
     }
   }
 
-  const handleUpdate =  (values, action) => {
+  const handleDelete = (id) => { // delete data in the state
+    const index = VAl.books.indexOf(id)
+    const updateData = VAl.books.splice(index, 1)
+    console.log(updateData);
+    if( updateData.indexOf(id) !== -1) {
+      ModalError('The book could not be deleted')
+    } else {
+      const NewValues = {
+        target:{
+          value: updateData,
+          name: 'author.books'
+        }
+      }
+      ModalSucces('The Book was successfully removed', handleData, NewValues)
+    }
+  }
+
+
+  const handleUpdate =  (values, action) => { //update data in the state
     console.log(values, action);
     const newData = [...VAl.books];
     let index
@@ -249,7 +268,7 @@ const handleChangeError = (value) => {
     action.resetForm(data)
   }
 
-  const handleSubmit = async(values, action) => {
+  const handleSubmit = async(values, action) => { // get data of form of the book
     if(values.id === '') {
       await handleAddnew(values, action)
     } else {
@@ -257,7 +276,7 @@ const handleChangeError = (value) => {
     }
   }
 
-  const handleAddnew = (values, action) => {
+  const handleAddnew = (values, action) => { // add new book in the state
     const newData = [...VAl.books];
     let id = newData.length + 1
     newData.push({
