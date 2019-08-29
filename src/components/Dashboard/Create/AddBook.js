@@ -83,7 +83,7 @@ const handleChangeError = (value) => {
               <UncontrolledTooltip placement="top" target={`editUbicationBook${id}`}>
               Edit Ubication the Book
             </UncontrolledTooltip>
-                <i className='fa fa-pencil mx-auto' target={`editUbicationBook${id}`} onClick={()=>{handleUpdateData(data, setFieldValue)}} style={{fontSize: 20, cursor: 'pointer'}}></i>
+                <i className='fa fa-pencil mx-auto' id={`editUbicationBook${id}`} onClick={()=>{handleUpdateData(data, setFieldValue)}} style={{fontSize: 20, cursor: 'pointer'}}></i>
               </Fragment>),
         }
     })
