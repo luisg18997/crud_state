@@ -3,7 +3,7 @@ import {Row, Col, UncontrolledTooltip} from 'reactstrap'
 import ListBooks from './ListBooks'
 
 const ListAutor = (props) => {
-  const { values, handleDeleteBook, handleDeleteAuthor} = props
+  const { values, handleDeleteBook, handleDeleteAuthor, handleSearchAuthor, handleSearchBook} = props
   let Content
 
   const handleContent = () => {
@@ -19,14 +19,14 @@ const ListAutor = (props) => {
               <UncontrolledTooltip placement="top" target="editAuthor">
               Edit Author
             </UncontrolledTooltip>
-              <i className='fa fa-pencil mx-auto pr-2' id='editAuthor' style={{fontSize: 20}}></i>
+              <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleSearchAuthor(res.id)}} id='editAuthor' style={{fontSize: 20}}></i>
               <UncontrolledTooltip placement="top" target="deleteAuthor">
               Delete Author
             </UncontrolledTooltip>
               <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteAuthor(res.id)}} id='deleteAuthor' style={{fontSize: 20}}></i>
               </Col>
               <Col xs={12} md={12}>
-              <ListBooks data={res.books} authorID={res.id} handleDeleteBook={handleDeleteBook} />
+              <ListBooks data={res.books} handleSearchBook={handleSearchBook} authorID={res.id} handleDeleteBook={handleDeleteBook} />
               </Col>
             </Fragment>
           )

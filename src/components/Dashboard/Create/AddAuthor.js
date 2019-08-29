@@ -15,7 +15,6 @@ const AddTodo = (props) => {
 
   const handleSubmit = async(NewVal, action) => { // Save author
     if(NewVal.author.books.length !== 0) {
-      console.log(values);
       NewVal.author.id = values.length +1
       await handleChange(NewVal.author)
       await  action.resetForm(data)

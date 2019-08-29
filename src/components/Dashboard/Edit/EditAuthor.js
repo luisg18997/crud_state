@@ -5,20 +5,18 @@ import LibraryForm from '../../forms/LibraryForm'
 import LibraryValidation from '../../forms/validations/LibraryValidation'
 import {Row, Col} from 'reactstrap'
 
-const AddTodo = (props) => {
+const EditAuthor = (props) => {
   const {
-    values,
-    setStatus,
     data,
-    handleChange
+    setStatus,
+    handleChange,
+    setUpdate
   } = props
 
   const handleSubmit = async(NewVal, action) => {
     if(NewVal.author.books.length !== 0) {
-      console.log(values);
-      NewVal.author.id = values.length +1
-      await handleChange(NewVal.author)
-      await  action.resetForm(data)
+      await handleChange(NewVal)
+      await setUpdate({action: false})
       await setStatus(false)
     } else {
       ModalError('Please ADD ONE BOOK of the Author')
@@ -40,6 +38,7 @@ const AddTodo = (props) => {
             handleSubmit={handleSubmit}
             validationSchema={LibraryValidation}
             MyForm={LibraryForm}
+            handleViewRows={setUpdate}
             handleData={handleData}
           />
         </Col>
@@ -49,4 +48,4 @@ const AddTodo = (props) => {
 }
 
 
-export default AddTodo
+export default EditAuthor

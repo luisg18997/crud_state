@@ -12,6 +12,8 @@ const BooksForms = (props) => {
     setFieldValue,
     handleBlur,
     handleData,
+    handleViewRows,
+    edit,
     setFieldTouched,
     error,
     touched
@@ -78,6 +80,12 @@ const BooksForms = (props) => {
     setFieldValue(name, value)
   }
 
+  useEffect(()=> {
+    if(edit===true) {
+      handleViewRows(setFieldValue)
+    }
+  }, [edit])
+
   useEffect(() => { // add newValueSelect to Select
     let newValueSelect = []
     for (let i = 0; i < book_genre.length; i++) {
@@ -109,7 +117,7 @@ const BooksForms = (props) => {
   setFieldValue('book_genre_selected', book_genre_selected)
 }
 
-  useEffect(() => { // update selection of the ubication of the book 
+  useEffect(() => { // update selection of the ubication of the book
     const handleUpdate = () => {
       handleData(library)
       if(library === 'true') {
@@ -131,7 +139,9 @@ const BooksForms = (props) => {
     handleUpdate()
   }, [library])
 
-
+console.log(
+  props
+);
     return (
             <Fragment>
             <Row form className='w-100'>

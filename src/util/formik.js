@@ -9,7 +9,9 @@ const Form = (props) => {
     validationSchema,
     MyForm,
     valuesSelect,
+    edit,
     handleData,
+    handleViewRows,
     valueButton,
   } = props
   return(
@@ -28,6 +30,8 @@ const Form = (props) => {
        valueButton={valueButton}
        setFieldValue={props.setFieldValue}
        handleData={handleData}
+       edit={edit}
+       handleViewRows={handleViewRows}
        setFieldTouched={props.setFieldTouched}
         />} />
   )
@@ -41,6 +45,8 @@ Form.propTypes = {
   MyForm: PropTypes.func.isRequired,
   validationSchema: PropTypes.object.isRequired,
   valueButton: PropTypes.bool.isRequired,
+  handleViewRows: PropTypes.func,
+  edit: PropTypes.bool.isRequired,
 };
 
 Form.defaultProps = {
