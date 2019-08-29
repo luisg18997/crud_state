@@ -70,7 +70,7 @@ const handleViewRows = (setFieldValue) => {
       book_genre: res.book_genre.join(', '),
       resumen: res.resumen,
       action: (<Fragment>
-        <UncontrolledTooltip placement="top" target=target={`editBook${res.id}`}>
+        <UncontrolledTooltip placement="top" target={`editBook${res.id}`}>
         Edit Book
       </UncontrolledTooltip>
           <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(res, setFieldValue)}} id={`editBook${res.id}`} style={{fontSize: 20}}></i>
