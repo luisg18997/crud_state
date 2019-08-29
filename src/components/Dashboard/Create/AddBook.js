@@ -61,14 +61,14 @@ const handleChangeError = (value) => {
       book_genre: values.book_genre.join(', '),
       resumen: values.resumen,
       action: (<Fragment>
-        <UncontrolledTooltip placement="top" target="editBook">
+        <UncontrolledTooltip placement="top" target={`editBook${id}`} >
         Edit Book
       </UncontrolledTooltip>
-          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(data, setFieldValue)}} id='editBook' style={{fontSize: 20}}></i>
-          <UncontrolledTooltip placement="top" target="deleteBook">
+          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(data, setFieldValue)}} id={`editBook${id}`} style={{fontSize: 20}}></i>
+          <UncontrolledTooltip placement="top" target={`deleteBook${id}`} >
         Delete Book
       </UncontrolledTooltip>
-        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(id)}} id='deleteBook' style={{fontSize: 20}}></i>
+        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(id)}} id={`deleteBook${id}`} style={{fontSize: 20}}></i>
         </Fragment>),
       subRow:
         {
@@ -80,10 +80,10 @@ const handleChangeError = (value) => {
           return_date: values.ubication.loan.return_date || '',
             action: (
               <Fragment>
-              <UncontrolledTooltip placement="top" target="editUbicationBook">
+              <UncontrolledTooltip placement="top" target={`editUbicationBook${id}`}>
               Edit Ubication the Book
             </UncontrolledTooltip>
-                <i className='fa fa-pencil mx-auto' id='editUbicationBook' onClick={()=>{handleUpdateData(data, setFieldValue)}} style={{fontSize: 20}}></i>
+                <i className='fa fa-pencil mx-auto' target={`editUbicationBook${id}`} onClick={()=>{handleUpdateData(data, setFieldValue)}} style={{fontSize: 20}}></i>
               </Fragment>),
         }
     })

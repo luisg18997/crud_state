@@ -47,9 +47,12 @@ const LibraryForm = (props) => {
             }
           </Col>
           <Col xs={12} className='text-center'>
-            <button type="submit" onClick={handleSend} className="btn btn-success mt-2 pl-5 pr-5"><strong className='letter'><span>SEND</span></strong></button>
+            {
+              rows.length > 0 &&
+              <button type="submit" onClick={handleSend} className="btn btn-success mt-2 pl-5 pr-5"><strong className='letter'><span>SEND</span></strong></button>
+            }
             {values.editAuthor === true &&
-              <button type="button" onClick={() =>{handleViewRows({action:false})}} className="btn btn-danger mt-2 ml-4 pl-5 pr-5"><strong className='letter'><span>Cancel</span></strong></button>
+              <button type="button" onClick={() =>{handleViewRows()}} className="btn btn-danger mt-2 ml-4 pl-5 pr-5"><strong className='letter'><span>Cancel</span></strong></button>
             }
           </Col>
         </Row>

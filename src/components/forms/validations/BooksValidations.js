@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 
+
 const validations = (value) => {
   let validation = {}
   if(value === true) {
@@ -18,6 +19,11 @@ const validations = (value) => {
       .max(new Date(), 'later dates to the current are not allowed')
       .required('is required'),
       return_date: Yup.date()
+      .when('withdrawal_date',(value, schema) => {
+        if(value!=='') {
+          return schema.min(value,`dates previous to the ${value} is not permitted`)
+        }
+      })
       .required('is required')
     })
   }

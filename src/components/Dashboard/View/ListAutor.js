@@ -14,19 +14,24 @@ const ListAutor = (props) => {
         {values.Library.authors.map((res, key) => {
           return(
             <Fragment key={key}>
+            <Col xs={6} md={6}  className='text-center'><b>Author</b></Col>
+            <Col xs={6} md={6} className='text-right'><b>Action</b></Col>
             <Col xs={6} md={6}  className='text-center'>{res.name}</Col>
-            <Col xs={6} md={6} className='ml-auto'>
-              <UncontrolledTooltip placement="top" target="editAuthor">
+            <Col xs={6} md={6} className='text-right'>
+              <UncontrolledTooltip placement="top" target={`editAuthor${key}`}>
               Edit Author
             </UncontrolledTooltip>
-              <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleSearchAuthor(res.id)}} id='editAuthor' style={{fontSize: 20}}></i>
-              <UncontrolledTooltip placement="top" target="deleteAuthor">
+              <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleSearchAuthor(res.id)}} id={`editAuthor${key}`} style={{fontSize: 20}}></i>
+              <UncontrolledTooltip placement="top" target={`deleteAuthor${key}`}>
               Delete Author
             </UncontrolledTooltip>
-              <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteAuthor(res.id)}} id='deleteAuthor' style={{fontSize: 20}}></i>
+              <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteAuthor(res.id)}} id={`deleteAuthor${key}`} style={{fontSize: 20}}></i>
               </Col>
               <Col xs={12} md={12}>
               <ListBooks data={res.books} handleSearchBook={handleSearchBook} authorID={res.id} handleDeleteBook={handleDeleteBook} />
+              </Col>
+              <Col xs={12} md={12}>
+              <hr />
               </Col>
             </Fragment>
           )

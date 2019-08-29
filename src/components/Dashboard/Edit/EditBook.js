@@ -70,14 +70,14 @@ const handleViewRows = (setFieldValue) => {
       book_genre: res.book_genre.join(', '),
       resumen: res.resumen,
       action: (<Fragment>
-        <UncontrolledTooltip placement="top" target="editBook">
+        <UncontrolledTooltip placement="top" target=target={`editBook${res.id}`}>
         Edit Book
       </UncontrolledTooltip>
-          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(res, setFieldValue)}} id='editBook' style={{fontSize: 20}}></i>
-          <UncontrolledTooltip placement="top" target="deleteBook">
+          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(res, setFieldValue)}} id={`editBook${res.id}`} style={{fontSize: 20}}></i>
+          <UncontrolledTooltip placement="top" target={`deleteBook${res.id}`}>
         Delete Book
       </UncontrolledTooltip>
-        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(res.id)}} id='deleteBook' style={{fontSize: 20}}></i>
+        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(res.id)}} id={`deleteBook${res.id}`} style={{fontSize: 20}}></i>
         </Fragment>),
       subRow:
         {
@@ -89,10 +89,10 @@ const handleViewRows = (setFieldValue) => {
           return_date: res.ubication.loan.return_date || '',
             action: (
               <Fragment>
-              <UncontrolledTooltip placement="top" target="editUbicationBook">
+              <UncontrolledTooltip placement="top" target={`editUbicationBook${res.id}`}>
               Edit Ubication the Book
             </UncontrolledTooltip>
-                <i className='fa fa-pencil mx-auto' id='editUbicationBook' onClick={()=>{handleUpdateData(res, setFieldValue)}} style={{fontSize: 20}}></i>
+                <i className='fa fa-pencil mx-auto' id={`editUbicationBook${res.id}`} onClick={()=>{handleUpdateData(res, setFieldValue)}} style={{fontSize: 20}}></i>
               </Fragment>),
         }
     })
@@ -109,40 +109,40 @@ const handleNewData = (values, id, setFieldValue) => { // add roe in the table
       library = 'No'
     }
     const data = {...values, id : id}
-  NewValues.push({
-    id: id,
-    name: values.name,
-    publication_date: values.publication_date,
-    editorial: values.editorial,
-    book_genre: values.book_genre.join(', '),
-    resumen: values.resumen,
-    action: (<Fragment>
-      <UncontrolledTooltip placement="top" target="editBook">
-      Edit Book
-    </UncontrolledTooltip>
-        <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(data, setFieldValue)}} id='editBook' style={{fontSize: 20}}></i>
-        <UncontrolledTooltip placement="top" target="deleteBook">
-      Delete Book
-    </UncontrolledTooltip>
-      <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(id)}} id='deleteBook' style={{fontSize: 20}}></i>
-      </Fragment>),
-    subRow:
-      {
-        library:library,
-        library_ubication: values.ubication.library_ubication || '',
-        responsable: values.ubication.loan.responsable || '',
-        card_id: values.ubication.loan.card_id || '',
-        withdrawal_date: values.ubication.loan.withdrawal_date || '',
-        return_date: values.ubication.loan.return_date || '',
-          action: (
-            <Fragment>
-            <UncontrolledTooltip placement="top" target="editUbicationBook">
-            Edit Ubication the Book
-          </UncontrolledTooltip>
-              <i className='fa fa-pencil mx-auto' id='editUbicationBook' onClick={()=>{handleUpdateData(data, setFieldValue)}} style={{fontSize: 20}}></i>
-            </Fragment>),
-      }
-  })
+    NewValues.push({
+      id: id,
+      name: values.name,
+      publication_date: values.publication_date,
+      editorial: values.editorial,
+      book_genre: values.book_genre.join(', '),
+      resumen: values.resumen,
+      action: (<Fragment>
+        <UncontrolledTooltip placement="top" target={`editBook${id}`} >
+        Edit Book
+      </UncontrolledTooltip>
+          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(data, setFieldValue)}} id={`editBook${id}`} style={{fontSize: 20}}></i>
+          <UncontrolledTooltip placement="top" target={`deleteBook${id}`} >
+        Delete Book
+      </UncontrolledTooltip>
+        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(id)}} id={`deleteBook${id}`} style={{fontSize: 20}}></i>
+        </Fragment>),
+      subRow:
+        {
+          library:library,
+          library_ubication: values.ubication.library_ubication || '',
+          responsable: values.ubication.loan.responsable || '',
+          card_id: values.ubication.loan.card_id || '',
+          withdrawal_date: values.ubication.loan.withdrawal_date || '',
+          return_date: values.ubication.loan.return_date || '',
+            action: (
+              <Fragment>
+              <UncontrolledTooltip placement="top" target={`editUbicationBook${id}`}>
+              Edit Ubication the Book
+            </UncontrolledTooltip>
+                <i className='fa fa-pencil mx-auto' target={`editUbicationBook${id}`} onClick={()=>{handleUpdateData(data, setFieldValue)}} style={{fontSize: 20}}></i>
+              </Fragment>),
+        }
+    })
   setRows(NewValues)
 }
 

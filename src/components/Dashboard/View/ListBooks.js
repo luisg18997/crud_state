@@ -26,14 +26,14 @@ useEffect(() => {
       book_genre: res.book_genre.join(', '),
       resumen: res.resumen,
       action: (<Fragment>
-        <UncontrolledTooltip placement="top" target="editBookView">
+        <UncontrolledTooltip placement="top" target={`editBookView${authorID}${res.id}`}>
         Edit Book
       </UncontrolledTooltip>
-          <i className='fa fa-pencil mx-auto pr-2' id='editBookView' onClick={()=>{handleSearchBook(authorID,res.id)}} style={{fontSize: 20}}></i>
-          <UncontrolledTooltip placement="top" target="deleteBookView">
+          <i className='fa fa-pencil mx-auto pr-2' id={`editBookView${authorID}${res.id}`} onClick={()=>{handleSearchBook(authorID,res.id)}} style={{fontSize: 20}}></i>
+          <UncontrolledTooltip placement="top" target={`deleteBookView${authorID}${res.id}`}>
         Delete Book
       </UncontrolledTooltip>
-        <i className="fa fa-trash-o mx-auto" id='deleteBookView' onClick={()=>{handleDeleteBook(authorID, res.id)}} style={{fontSize: 20}}></i>
+        <i className="fa fa-trash-o mx-auto" id={`deleteBookView${authorID}${res.id}`} onClick={()=>{handleDeleteBook(authorID, res.id)}} style={{fontSize: 20}}></i>
         </Fragment>),
       subRow:
         {
@@ -45,10 +45,10 @@ useEffect(() => {
           return_date: res.ubication.loan.return_date || '',
             action: (
               <Fragment>
-              <UncontrolledTooltip placement="top" target="editUbicationBookView">
+              <UncontrolledTooltip placement="top" target={`editUbicationBookView${authorID}${res.id}`}>
               Edit Ubication the Book
             </UncontrolledTooltip>
-                <i className='fa fa-pencil mx-auto' onClick={()=>{handleSearchBook(authorID,res.id)}} id='editUbicationBookView' style={{fontSize: 20}}></i>
+                <i className='fa fa-pencil mx-auto' onClick={()=>{handleSearchBook(authorID,res.id)}} id={`editUbicationBookView${authorID}${res.id}`} style={{fontSize: 20}}></i>
               </Fragment>),
         }
     })})

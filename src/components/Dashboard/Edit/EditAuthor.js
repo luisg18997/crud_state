@@ -23,6 +23,11 @@ const EditAuthor = (props) => {
     }
   }
 
+  const handleCanceledEdit = () => {
+    setUpdate({action: false})
+    setStatus(false)
+  }
+
   const handleData= (setView, setRows) => {
     setView([])
     setRows([])
@@ -38,7 +43,7 @@ const EditAuthor = (props) => {
             handleSubmit={handleSubmit}
             validationSchema={LibraryValidation}
             MyForm={LibraryForm}
-            handleViewRows={setUpdate}
+            handleViewRows={handleCanceledEdit}
             handleData={handleData}
           />
         </Col>
