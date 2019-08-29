@@ -21,11 +21,11 @@ const ListAutor = (props) => {
               <UncontrolledTooltip placement="top" target={`editAuthor${key}`}>
               Edit Author
             </UncontrolledTooltip>
-              <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleSearchAuthor(res.id)}} id={`editAuthor${key}`} style={{fontSize: 20}}></i>
+              <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleSearchAuthor(res.id)}} id={`editAuthor${key}`} style={{fontSize: 20, cursor: 'pointer'}}></i>
               <UncontrolledTooltip placement="top" target={`deleteAuthor${key}`}>
               Delete Author
             </UncontrolledTooltip>
-              <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteAuthor(res.id)}} id={`deleteAuthor${key}`} style={{fontSize: 20}}></i>
+              <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteAuthor(res.id)}} id={`deleteAuthor${key}`} style={{fontSize: 20, cursor: 'pointer'}}></i>
               </Col>
               <Col xs={12} md={12}>
               <ListBooks data={res.books} handleSearchBook={handleSearchBook} authorID={res.id} handleDeleteBook={handleDeleteBook} />

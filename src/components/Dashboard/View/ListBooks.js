@@ -29,11 +29,11 @@ useEffect(() => {
         <UncontrolledTooltip placement="top" target={`editBookView${authorID}${res.id}`}>
         Edit Book
       </UncontrolledTooltip>
-          <i className='fa fa-pencil mx-auto pr-2' id={`editBookView${authorID}${res.id}`} onClick={()=>{handleSearchBook(authorID,res.id)}} style={{fontSize: 20}}></i>
+          <i className='fa fa-pencil mx-auto pr-2' id={`editBookView${authorID}${res.id}`} onClick={()=>{handleSearchBook(authorID,res.id)}} style={{fontSize: 20, cursor: 'pointer'}}></i>
           <UncontrolledTooltip placement="top" target={`deleteBookView${authorID}${res.id}`}>
         Delete Book
       </UncontrolledTooltip>
-        <i className="fa fa-trash-o mx-auto" id={`deleteBookView${authorID}${res.id}`} onClick={()=>{handleDeleteBook(authorID, res.id)}} style={{fontSize: 20}}></i>
+        <i className="fa fa-trash-o mx-auto" id={`deleteBookView${authorID}${res.id}`} onClick={()=>{handleDeleteBook(authorID, res.id)}} style={{fontSize: 20, cursor: 'pointer'}}></i>
         </Fragment>),
       subRow:
         {
@@ -48,7 +48,7 @@ useEffect(() => {
               <UncontrolledTooltip placement="top" target={`editUbicationBookView${authorID}${res.id}`}>
               Edit Ubication the Book
             </UncontrolledTooltip>
-                <i className='fa fa-pencil mx-auto' onClick={()=>{handleSearchBook(authorID,res.id)}} id={`editUbicationBookView${authorID}${res.id}`} style={{fontSize: 20}}></i>
+                <i className='fa fa-pencil mx-auto' onClick={()=>{handleSearchBook(authorID,res.id)}} id={`editUbicationBookView${authorID}${res.id}`} style={{fontSize: 20, cursor: 'pointer'}}></i>
               </Fragment>),
         }
     })})

@@ -73,11 +73,11 @@ const handleViewRows = (setFieldValue) => {
         <UncontrolledTooltip placement="top" target={`editBook${res.id}`}>
         Edit Book
       </UncontrolledTooltip>
-          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(res, setFieldValue)}} id={`editBook${res.id}`} style={{fontSize: 20}}></i>
+          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(res, setFieldValue)}} id={`editBook${res.id}`} style={{fontSize: 20, cursor: 'pointer'}}></i>
           <UncontrolledTooltip placement="top" target={`deleteBook${res.id}`}>
         Delete Book
       </UncontrolledTooltip>
-        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(res.id)}} id={`deleteBook${res.id}`} style={{fontSize: 20}}></i>
+        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(res.id)}} id={`deleteBook${res.id}`} style={{fontSize: 20, cursor: 'pointer'}}></i>
         </Fragment>),
       subRow:
         {
@@ -92,7 +92,7 @@ const handleViewRows = (setFieldValue) => {
               <UncontrolledTooltip placement="top" target={`editUbicationBook${res.id}`}>
               Edit Ubication the Book
             </UncontrolledTooltip>
-                <i className='fa fa-pencil mx-auto' id={`editUbicationBook${res.id}`} onClick={()=>{handleUpdateData(res, setFieldValue)}} style={{fontSize: 20}}></i>
+                <i className='fa fa-pencil mx-auto' id={`editUbicationBook${res.id}`} onClick={()=>{handleUpdateData(res, setFieldValue)}} style={{fontSize: 20, cursor: 'pointer', cursor: 'pointer'}}></i>
               </Fragment>),
         }
     })
@@ -120,11 +120,11 @@ const handleNewData = (values, id, setFieldValue) => { // add roe in the table
         <UncontrolledTooltip placement="top" target={`editBook${id}`} >
         Edit Book
       </UncontrolledTooltip>
-          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(data, setFieldValue)}} id={`editBook${id}`} style={{fontSize: 20}}></i>
+          <i className='fa fa-pencil mx-auto pr-2' onClick={()=>{handleUpdateData(data, setFieldValue)}} id={`editBook${id}`} style={{fontSize: 20, cursor: 'pointer'}}></i>
           <UncontrolledTooltip placement="top" target={`deleteBook${id}`} >
         Delete Book
       </UncontrolledTooltip>
-        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(id)}} id={`deleteBook${id}`} style={{fontSize: 20}}></i>
+        <i className="fa fa-trash-o mx-auto" onClick={()=>{handleDeleteData(id)}} id={`deleteBook${id}`} style={{fontSize: 20, cursor: 'pointer'}}></i>
         </Fragment>),
       subRow:
         {
@@ -139,7 +139,7 @@ const handleNewData = (values, id, setFieldValue) => { // add roe in the table
               <UncontrolledTooltip placement="top" target={`editUbicationBook${id}`}>
               Edit Ubication the Book
             </UncontrolledTooltip>
-                <i className='fa fa-pencil mx-auto' target={`editUbicationBook${id}`} onClick={()=>{handleUpdateData(data, setFieldValue)}} style={{fontSize: 20}}></i>
+                <i className='fa fa-pencil mx-auto' target={`editUbicationBook${id}`} onClick={()=>{handleUpdateData(data, setFieldValue)}} style={{fontSize: 20, cursor: 'pointer'}}></i>
               </Fragment>),
         }
     })
