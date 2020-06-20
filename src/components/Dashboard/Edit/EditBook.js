@@ -92,7 +92,7 @@ const handleViewRows = (setFieldValue) => {
               <UncontrolledTooltip placement="top" target={`editUbicationBook${res.id}`}>
               Edit Ubication the Book
             </UncontrolledTooltip>
-                <i className='fa fa-pencil mx-auto' id={`editUbicationBook${res.id}`} onClick={()=>{handleUpdateData(res, setFieldValue)}} style={{fontSize: 20, cursor: 'pointer', cursor: 'pointer'}}></i>
+                <i className='fa fa-pencil mx-auto' id={`editUbicationBook${res.id}`} onClick={()=>{handleUpdateData(res, setFieldValue)}} style={{fontSize: 20, cursor: 'pointer'}}></i>
               </Fragment>),
         }
     })
